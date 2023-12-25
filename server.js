@@ -15,10 +15,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 try {
-  console.log('hello');
   await mongoose.connect(DB, {});
   console.log('Connected to MongoDB');
-} catch (error) {
+  } catch (error) {
   console.error('Error connecting to MongoDB:', error.message);
 }
 
@@ -27,14 +26,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
-console.log("inside server");
 app.use('/api', apiRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, '../client/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html" , "index.html"));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
 
 app.get("/", (req, res) => {
   res.send("<h1>Welcome To DreamWed- Connect</h1>");
