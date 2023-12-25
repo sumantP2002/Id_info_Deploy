@@ -33,7 +33,7 @@ app.use('/api', apiRoutes);
 // Static files
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html" , "index.html"));
 });
 
 app.get("/", (req, res) => {
@@ -42,10 +42,8 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 8000;
 
-// Heroku deployment step
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running at ${PORT}`);
